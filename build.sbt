@@ -22,6 +22,9 @@ lazy val root = (project in file("."))
     addCompilerPlugin("com.olegpy"    %% "better-monadic-for" % "0.3.0")
   )
 
+//sbt graalvm-native-image:packageBin
+enablePlugins(GraalVMNativeImagePlugin)
+
 scalacOptions ++= Seq(
   "-deprecation",
   "-encoding", "UTF-8",

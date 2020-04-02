@@ -60,6 +60,13 @@ object Spaces {
 
   def get(client: Client[IO]): IO[Json] = client.expect[Json](request).handleErrorWith(t => IO.pure(t.getMessage.asJson))
 
+  /*
+   * root
+   *   - mdname
+   *     - grandchild1
+   *   - typed
+  */
+
   def post(client: Client[IO], ioJson: IO[Json]): IO[Json] = ioJson.flatMap(json => {
     val cursor = json.hcursor
     val title  = cursor.downField("mdname").as[String].fold[String](_ => "", s => s)
